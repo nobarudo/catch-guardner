@@ -6,6 +6,21 @@ public partial class Player : CharacterBody2D
 	// 移動スピード（インスペクターから後で調整できます）
 	[Export]
 	public float Speed { get; set; } = 400.0f;
+	
+	public override void _Ready()
+	{
+		// 画面（ビューポート）のサイズを取得します
+		Vector2 screenSize = GetViewportRect().Size;
+
+		// X座標：画面の横幅の半分（中央）
+		float startX = screenSize.X / 2;
+		
+		// Y座標：画面の縦幅から少し引いた値（下から50ピクセル上の位置）
+		float startY = screenSize.Y - 50.0f; 
+
+		// プレイヤーの現在位置（GlobalPosition）に新しい座標を設定します
+		GlobalPosition = new Vector2(startX, startY);
+	}
 
 	// 物理演算や移動の処理は _PhysicsProcess に書きます
 	public override void _PhysicsProcess(double delta)
